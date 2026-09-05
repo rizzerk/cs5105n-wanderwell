@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bviu2lekin1ic"]
+
+[ext_resource type="Texture2D" uid="uid://cxi7xs51pomvt" path="res://Graphics/nemo.png" id="1_ig7tw"]
+
+[node name="Main" type="Node2D" unique_id=608745778]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=602993048]
+position = Vector2(598, 307.00003)
+scale = Vector2(0.27, 0.27)
+texture = ExtResource("1_ig7tw")

@@ -1,0 +1,87 @@
+# ============================================================
+# Godot 4.x
+# ============================================================
+
+# Godot generated project data
+.godot/
+
+# Godot imported assets (older Godot versions / compatibility)
+.import/
+
+# Godot temporary files
+*.tmp
+
+# Godot export configuration
+export.cfg
+export_credentials.cfg
+
+# Imported translations generated from CSV files
+*.translation
+
+
+# ============================================================
+# Godot .NET / C# (not needed for GDScript, but safe to ignore)
+# ============================================================
+
+.mono/
+data_*/
+mono_crash.*.json
+
+
+# ============================================================
+# Godot export / build files
+# ============================================================
+
+/export/
+/exports/
+/build/
+
+
+# ============================================================
+# IDE / Editor files
+# ============================================================
+
+.vscode/
+.idea/
+
+
+# ============================================================
+# Operating System files
+# ============================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS folder metadata
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Windows thumbnail cache
+$RECYCLE.BIN/
+
+
+# ============================================================
+# Temporary / backup files
+# ============================================================
+
+*.bak
+*.backup
+*.swp
+*.swo
+*~
+
+# Crash dumps
+*.dmp
+
+
+# ============================================================
+# Logs
+# ============================================================
+
+*.log
