@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxi7xs51pomvt"
-path="res://.godot/imported/nemo.png-fc370500c13a8fc5b29979d397a815ad.ctex"
+uid="uid://dlk1mmt8pdqwe"
+path="res://.godot/imported/crouch_down.png-7903d8b91cb061521380f336e3561276.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/nemo.png"
-dest_files=["res://.godot/imported/nemo.png-fc370500c13a8fc5b29979d397a815ad.ctex"]
+source_file="res://player/crouch_down.png"
+dest_files=["res://.godot/imported/crouch_down.png-7903d8b91cb061521380f336e3561276.ctex"]
 
 [params]
 

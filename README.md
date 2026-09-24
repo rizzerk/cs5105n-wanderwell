@@ -1,5 +1,11 @@
 # Wanderwell
 
+2D precision platformer made in Godot 4.7.2 for CS-5105N Game Development.
+ 
+## Overview
+ 
+The player controls a girl carrying a lantern who moves through platform levels. Visibility is limited to the area around the lantern, so jumps have to be judged from partial information. The focus is on jump feel: input forgiveness (coyote time), landing feedback, and levels where safe ground and hazards are easy to tell apart.
+
 ## Game Genre
 
 **2D Platformer / Atmospheric Precision Platforming**
@@ -88,3 +94,49 @@ Two juice elements were implemented:
 ### Screenshot
 
 ![Activity 2 — Core Mechanic & Game Feel](screenshots/core-mechanic.png)
+
+
+## Activity 3 — Level Design
+ 
+**Goal:** Two playable levels built with `TileMapLayer`, each with a start, a goal, hazards, and a transition to the next level.
+ 
+### Implementation
+ 
+* Levels are painted on a `TileMapLayer` using the `Ground` terrain in `tileset_64.tres`. Edges and corners are connected automatically.
+* Spikes are `Area2D` scenes with `hazard.gd`. A wide `Area2D` below each level acts as a kill zone for falling out of the level.
+* The goal is an `Area2D` with `goal.gd`. Level 1's `next_level` points to `level_2.tscn`. Level 2 leaves it empty.
+* The player starts at a `Marker2D` position and respawns there after a hazard.
+* The Activity 2 `StaticBody2D` platforms were replaced by the tilemap.
+
+### Difficulty Curve
+ 
+Jump limits with the current values: height is `v² / (2g)` = 73.5 px (about 1.1 tiles), air time is `2v / g` = 0.7 s, and horizontal distance is `speed × air time` = 210 px (about 3.3 tiles). Coyote time adds about 36 px. Every step up in the levels is 1 tile or less.
+ 
+### Readability and Inclusive Content
+ 
+**Reflection:** All characters and set pieces are original and stylized, with no real-world cultural symbols used as decoration or hazards, and hazards are distinguished by shape and brightness, not color alone, so the levels stay readable for color-blind players.
+ 
+* Spikes are pale and jagged. Safe ground has a bright top edge.
+* The goal is the only warm light in the level.
+* Checked in grayscale: hazards are still distinguishable from safe ground.
+### Testing Checklist
+ 
+* Level 1 can be completed from start to goal.
+* Level 2 can be completed from start to goal.
+* Touching spikes or falling into a pit respawns the player at the start.
+* Reaching the goal in Level 1 loads Level 2.
+* The player cannot stand up under a low ceiling while crouched.
+* All animations play correctly.
+### Screenshots
+ 
+**Level 1**
+ 
+![Activity 3 — Level 1](screenshots/level-1.png)
+ 
+**Level 2**
+ 
+![Activity 3 — Level 2](screenshots/level-2.png)
+ 
+## Credits
+ 
+Tileset, character sprites, and the player, hazard, and goal scripts were made with AI assistance (Claude) and edited for this project.

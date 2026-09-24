@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://c0pxh41ikq1mp"]
 
-[ext_resource type="Texture2D" uid="uid://bfwh56dmedblo" path="res://Graphics/player.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://bljo16q3a6sai" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="SpriteFrames" uid="uid://b6os1kkwxa7qq" path="res://player_frames.tres" id="2_onrkg"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
-radius = 36.013885
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsjio"]
+size = Vector2(28, 52)
 
 [node name="Player" type="CharacterBody2D" unique_id=1730383654]
 script = ExtResource("1_onrkg")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=848819067]
-position = Vector2(97, 221)
-scale = Vector2(0.081, 0.081)
-texture = ExtResource("1_4flbx")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1886235518]
+sprite_frames = ExtResource("2_onrkg")
+animation = &"crouch_walk"
+frame_progress = 0.5567046
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1195440287]
-position = Vector2(97, 217)
-shape = SubResource("CircleShape2D_4flbx")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1806549611]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_fsjio")

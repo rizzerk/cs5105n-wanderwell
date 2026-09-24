@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://b73453r2uugst"]
+
+[ext_resource type="Texture2D" uid="uid://dyo8cn2otm0ke" path="res://tileset_64.png" id="1_scxj1"]
+[ext_resource type="Script" uid="uid://dotbs0cfdkcwn" path="res://scripts/hazard.gd" id="2_hnhvq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvtb1"]
+atlas = ExtResource("1_scxj1")
+region = Rect2(320.97626, 386.9123, 62.723755, 60.78772)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4h8m"]
+size = Vector2(64, 34.5)
+
+[node name="Spike" type="Area2D" unique_id=447067477]
+script = ExtResource("2_hnhvq")
+
+[node name="SpikeSprite" type="Sprite2D" parent="." unique_id=1449638266]
+texture = SubResource("AtlasTexture_mvtb1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=651111215]
+position = Vector2(0, 14.25)
+shape = SubResource("RectangleShape2D_v4h8m")

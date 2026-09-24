@@ -1,0 +1,472 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://b6os1kkwxa7qq"]
+
+[ext_resource type="Texture2D" uid="uid://041p8n6a6jsc" path="res://player/crouch_walk.png" id="crouch_walk"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sif3y"]
+load_path = "res://.godot/imported/crouch_down.png-7903d8b91cb061521380f336e3561276.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_crouch_down_0"]
+atlas = SubResource("CompressedTexture2D_sif3y")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_crouch_down_1"]
+atlas = SubResource("CompressedTexture2D_sif3y")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_laber"]
+load_path = "res://.godot/imported/crouch_idle.png-9730c433f4acb698ea8c8ff9c86919d8.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_crouch_idle_0"]
+atlas = SubResource("CompressedTexture2D_laber")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_crouch_idle_1"]
+atlas = SubResource("CompressedTexture2D_laber")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_crouch_walk_0"]
+atlas = ExtResource("crouch_walk")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_crouch_walk_1"]
+atlas = ExtResource("crouch_walk")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_crouch_walk_2"]
+atlas = ExtResource("crouch_walk")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_crouch_walk_3"]
+atlas = ExtResource("crouch_walk")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_crouch_walk_4"]
+atlas = ExtResource("crouch_walk")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_crouch_walk_5"]
+atlas = ExtResource("crouch_walk")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ko7sx"]
+load_path = "res://.godot/imported/fall.png-762a2d2deff4d435fd5176e069612eb0.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_fall_0"]
+atlas = SubResource("CompressedTexture2D_ko7sx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_fall_1"]
+atlas = SubResource("CompressedTexture2D_ko7sx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_fall_2"]
+atlas = SubResource("CompressedTexture2D_ko7sx")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ai85y"]
+load_path = "res://.godot/imported/hurt.png-51e3dccab4faf5a4b8d7d5af903dfd3b.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_hurt_0"]
+atlas = SubResource("CompressedTexture2D_ai85y")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_hurt_1"]
+atlas = SubResource("CompressedTexture2D_ai85y")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_hurt_2"]
+atlas = SubResource("CompressedTexture2D_ai85y")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wjpht"]
+load_path = "res://.godot/imported/idle.png-82a60f56845c16643a7b596b159e154d.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_idle_0"]
+atlas = SubResource("CompressedTexture2D_wjpht")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_idle_1"]
+atlas = SubResource("CompressedTexture2D_wjpht")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_idle_2"]
+atlas = SubResource("CompressedTexture2D_wjpht")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_idle_3"]
+atlas = SubResource("CompressedTexture2D_wjpht")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_idle_4"]
+atlas = SubResource("CompressedTexture2D_wjpht")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_idle_5"]
+atlas = SubResource("CompressedTexture2D_wjpht")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vabey"]
+load_path = "res://.godot/imported/jump_apex.png-49813780922e62977031ec1c02ea506c.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_jump_apex_0"]
+atlas = SubResource("CompressedTexture2D_vabey")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_jump_apex_1"]
+atlas = SubResource("CompressedTexture2D_vabey")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8dc7q"]
+load_path = "res://.godot/imported/jump_rise.png-e2d628c710f7a89754dd59e695d00864.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_jump_rise_0"]
+atlas = SubResource("CompressedTexture2D_8dc7q")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_jump_rise_1"]
+atlas = SubResource("CompressedTexture2D_8dc7q")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_jump_rise_2"]
+atlas = SubResource("CompressedTexture2D_8dc7q")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_314m5"]
+load_path = "res://.godot/imported/jump_start.png-df25fa452991b649e4f966e9d88581d0.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_jump_start_0"]
+atlas = SubResource("CompressedTexture2D_314m5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_jump_start_1"]
+atlas = SubResource("CompressedTexture2D_314m5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xgujg"]
+load_path = "res://.godot/imported/land.png-09cf04b76dfbb0f47eb976b83725d9e1.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_land_0"]
+atlas = SubResource("CompressedTexture2D_xgujg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_land_1"]
+atlas = SubResource("CompressedTexture2D_xgujg")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_land_2"]
+atlas = SubResource("CompressedTexture2D_xgujg")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c14ex"]
+load_path = "res://.godot/imported/push.png-e30a1a2149f125cf86a1c62c06011cbd.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_push_0"]
+atlas = SubResource("CompressedTexture2D_c14ex")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_push_1"]
+atlas = SubResource("CompressedTexture2D_c14ex")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_push_2"]
+atlas = SubResource("CompressedTexture2D_c14ex")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_push_3"]
+atlas = SubResource("CompressedTexture2D_c14ex")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_push_4"]
+atlas = SubResource("CompressedTexture2D_c14ex")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_push_5"]
+atlas = SubResource("CompressedTexture2D_c14ex")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_paelp"]
+load_path = "res://.godot/imported/run.png-33c2fa07cd4c5ca2732604934eb5c03c.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_run_0"]
+atlas = SubResource("CompressedTexture2D_paelp")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_run_1"]
+atlas = SubResource("CompressedTexture2D_paelp")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_run_2"]
+atlas = SubResource("CompressedTexture2D_paelp")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_run_3"]
+atlas = SubResource("CompressedTexture2D_paelp")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_run_4"]
+atlas = SubResource("CompressedTexture2D_paelp")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_run_5"]
+atlas = SubResource("CompressedTexture2D_paelp")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_run_6"]
+atlas = SubResource("CompressedTexture2D_paelp")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_run_7"]
+atlas = SubResource("CompressedTexture2D_paelp")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_llpc2"]
+load_path = "res://.godot/imported/run_start.png-416ea7fe0b1a5c39952552b9f4df0640.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_run_start_0"]
+atlas = SubResource("CompressedTexture2D_llpc2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_run_start_1"]
+atlas = SubResource("CompressedTexture2D_llpc2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pr0hb"]
+load_path = "res://.godot/imported/skid.png-d8068c2682a931bd9c4842693ed1a6ad.ctex"
+
+[sub_resource type="AtlasTexture" id="AT_skid_0"]
+atlas = SubResource("CompressedTexture2D_pr0hb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_skid_1"]
+atlas = SubResource("CompressedTexture2D_pr0hb")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AT_skid_2"]
+atlas = SubResource("CompressedTexture2D_pr0hb")
+region = Rect2(128, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_crouch_down_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_crouch_down_1")
+}],
+"loop": 0,
+"name": &"crouch_down",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_crouch_idle_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_crouch_idle_1")
+}],
+"loop": 1,
+"name": &"crouch_idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_crouch_walk_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_crouch_walk_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_crouch_walk_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_crouch_walk_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_crouch_walk_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_crouch_walk_5")
+}],
+"loop": 1,
+"name": &"crouch_walk",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_fall_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_fall_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_fall_2")
+}],
+"loop": 1,
+"name": &"fall",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_hurt_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_hurt_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_hurt_2")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_idle_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_idle_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_idle_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_idle_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_idle_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_idle_5")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_jump_apex_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_jump_apex_1")
+}],
+"loop": 0,
+"name": &"jump_apex",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_jump_rise_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_jump_rise_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_jump_rise_2")
+}],
+"loop": 0,
+"name": &"jump_rise",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_jump_start_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_jump_start_1")
+}],
+"loop": 0,
+"name": &"jump_start",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_land_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_land_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_land_2")
+}],
+"loop": 0,
+"name": &"land",
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_push_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_push_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_push_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_push_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_push_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_push_5")
+}],
+"loop": 1,
+"name": &"push",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_run_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_run_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_run_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_run_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_run_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_run_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_run_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_run_7")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_run_start_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_run_start_1")
+}],
+"loop": 0,
+"name": &"run_start",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_skid_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_skid_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_skid_2")
+}],
+"loop": 0,
+"name": &"skid",
+"speed": 10.0
+}]
