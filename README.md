@@ -119,7 +119,7 @@ Jump limits with the current values: height is `v² / (2g)` = 73.5 px (about 1.1
 * Spikes are pale and jagged. Safe ground has a bright top edge.
 * The goal is the only warm light in the level.
 * Checked in grayscale: hazards are still distinguishable from safe ground.
-### Testing Checklist
+### Testing & Results
  
 * Level 1 can be completed from start to goal.
 * Level 2 can be completed from start to goal.
@@ -140,3 +140,58 @@ Jump limits with the current values: height is `v² / (2g)` = 73.5 px (about 1.1
 ## Credits
  
 Tileset, character sprites, and the player, hazard, and goal scripts were made with AI assistance (Claude) and edited for this project.
+
+
+## Activity 4 — Art, Animation & Particles
+
+**Note:** The character's main animations (idle, run, jump, crouch, etc.) were
+built in Week 3 as part of the tilemap and player-state work, before this
+activity's scope was clarified. This week adds the AnimationPlayer-driven 
+effects, particles, lighting, and AI asset below.
+
+### AnimationPlayer
+
+An `AnimationPlayer` was added to the Player, building two animations in code
+at runtime (`_build_animations()` in `player.gd`):
+
+* `land_squash` — tweens `AnimatedSprite2D.scale` on landing, replacing the
+  manual `lerp` used in Week 2/3.
+* `lantern_flicker` — loops a subtle random flicker on the lantern's
+  `PointLight2D.energy`, between 0.85 and 1.0, on a 1.4s cycle.
+
+### Particles
+
+A `CPUParticles2D` node (`LandingDust`) emits a one-shot burst of 10 particles
+when the player lands, using the pre-collision fall speed (captured just
+before `move_and_slide()`, since `move_and_slide()` zeroes `velocity.y` on
+contact with the floor). Dust triggers when fall speed exceeds 100 px/s, so
+small hops stay quiet and real falls kick up visible dust.
+
+### Lighting
+
+* The lantern carries a `PointLight2D` (child of `AnimatedSprite2D`) using a
+  radial `GradientTexture2D`, warm amber color, mirrored on the X axis with
+  the character's facing direction.
+* Each level has a `CanvasModulate` darkening the scene, so the lantern is the
+  main source of visible light. Darkness increases per level:
+
+### AI-Generated Asset
+
+* **Tool:** Google Gemini (Nano Banana)
+* **Asset:** a decorative glowing crystal cluster, placed in levels as ambient
+  scenery, lit by its own `PointLight2D`.
+* **Edits made:** the first generation was smooth-shaded and didn't match the
+  game's flat pixel art, so it went through a second pass: background removed
+  (alpha-keyed), cropped to content, downscaled and color-quantized to a
+  7-color palette shared with the tileset, then re-scaled with
+  nearest-neighbor to restore hard pixel edges consistent with the rest of
+  the game's art.
+
+![Activity 4](screenshots/week4.png)
+
+### Testing & Results
+
+* Landing dust appears on real falls, not on small hops.
+* Lantern light follows the player and flips sides with facing direction.
+* Lantern flicker animation loops without stopping.
+* Crystal asset is lit and visible in at least one level.

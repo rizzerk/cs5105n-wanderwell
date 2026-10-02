@@ -20,6 +20,10 @@ extends CharacterBody2D
 @onready var collider: CollisionShape2D = $CollisionShape2D
 @onready var light: Node2D = get_node_or_null("AnimatedSprite2D/PointLight2D")  # optional lantern light
 
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var landing_dust: CPUParticles2D = $LandingDust
+@onready var lantern_light: Node2D = get_node_or_null("AnimatedSprite2D/PointLight2D")
+
 var shape: RectangleShape2D
 var stand_size: Vector2
 var stand_pos: Vector2
@@ -53,8 +57,37 @@ func _ready() -> void:
 
 	sprite.animation_finished.connect(_on_animation_finished)
 	sprite.play("idle")
+	
+	_build_animations()
+	if lantern_light:
+		anim_player.play("lantern_flicker")
 
+func _build_animations() -> void:
+	var lib := AnimationLibrary.new()
 
+	# tiny new animation #1: squash-and-stretch on landing, via AnimationPlayer
+	var squash := Animation.new()
+	squash.length = 0.25
+	var t := squash.add_track(Animation.TYPE_VALUE)
+	squash.track_set_path(t, "AnimatedSprite2D:scale")
+	squash.track_insert_key(t, 0.0, squash_amount)
+	squash.track_insert_key(t, 0.25, Vector2.ONE)
+	squash.value_track_set_update_mode(t, Animation.UPDATE_CONTINUOUS)
+	lib.add_animation("land_squash", squash)
+
+	# tiny new animation #2: lantern flicker, loops forever
+	if lantern_light:
+		var flick := Animation.new()
+		flick.length = 1.4
+		flick.loop_mode = Animation.LOOP_LINEAR
+		var ft := flick.add_track(Animation.TYPE_VALUE)
+		flick.track_set_path(ft, "AnimatedSprite2D/PointLight2D:energy")
+		for i in range(5):
+			flick.track_insert_key(ft, i * 1.4 / 4.0, randf_range(0.85, 1.0))
+		lib.add_animation("lantern_flicker", flick)
+
+	anim_player.add_animation_library("", lib)
+	
 func _physics_process(delta: float) -> void:
 	if dead:
 		return
@@ -93,17 +126,24 @@ func _physics_process(delta: float) -> void:
 		coyote_timer = 0.0
 		landing = false
 		_play("jump_start")
+	
+	var fall_speed := velocity.y  # her real falling speed, captured right before move_and_slide can zero it
+
+	move_and_slide()
 
 	# --- Landing ---
 	if is_on_floor() and not was_on_floor:
 		landing = true
 		_play("land")
-		sprite.scale = base_scale * squash_amount
+		anim_player.play("land_squash")
+		print("landed, fall_speed = ", fall_speed)
+		if fall_speed > 200.0:
+			landing_dust.restart()
+			landing_dust.emitting = true
+			print("dust triggered, velocity.y = ", velocity.y)
 	was_on_floor = is_on_floor()
 
-	move_and_slide()
 
-	sprite.scale = sprite.scale.lerp(base_scale, squash_recover_speed * delta)
 	_update_animation(direction)
 
 

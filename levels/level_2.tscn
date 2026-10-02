@@ -9,6 +9,9 @@
 
 [node name="Main" type="Node2D" unique_id=608745778]
 
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=305165503]
+color = Color(0.42358288, 0.42358288, 0.5370987, 1)
+
 [node name="Background" type="Sprite2D" parent="." unique_id=237152132]
 position = Vector2(628.2239, 348.5984)
 scale = Vector2(95.55222, 46.803204)
@@ -24,6 +27,7 @@ tile_set = ExtResource("1_v5uil")
 
 [node name="goal" parent="." unique_id=243285141 instance=ExtResource("2_5722l")]
 position = Vector2(997, 352)
+next_level = "uid://cjdtovc42uglk"
 
 [node name="Player" parent="." unique_id=1730383654 instance=ExtResource("3_ilhis")]
 position = Vector2(161, 415)
@@ -60,4 +64,4 @@ position = Vector2(864, 545)
 position = Vector2(928, 545)
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=357169069]
-position = Vector2(154, 428)
+position = Vector2(155, 433)

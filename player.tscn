@@ -3,6 +3,16 @@
 [ext_resource type="Script" uid="uid://bljo16q3a6sai" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="SpriteFrames" uid="uid://b6os1kkwxa7qq" path="res://player_frames.tres" id="2_onrkg"]
 
+[sub_resource type="Gradient" id="Gradient_v4h8m"]
+offsets = PackedFloat32Array(0.07672634, 0.31202045, 0.5370844, 0.7621483, 0.9207161, 0.9948849)
+colors = PackedColorArray(0.7700166, 0.7700166, 0.7700166, 0.7700166, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.79120886, 0.79120886, 0.79120886, 0.79120886, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mvtb1"]
+gradient = SubResource("Gradient_v4h8m")
+fill = 1
+fill_from = Vector2(0.508547, 0.4957265)
+fill_to = Vector2(0.8782051, 0.104700856)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsjio"]
 size = Vector2(28, 52)
 
@@ -14,6 +24,31 @@ sprite_frames = ExtResource("2_onrkg")
 animation = &"crouch_walk"
 frame_progress = 0.5567046
 
+[node name="PointLight2D" type="PointLight2D" parent="AnimatedSprite2D" unique_id=1133610511]
+position = Vector2(3, 12)
+color = Color(1, 0.9309246, 0.76737565, 1)
+energy = 1.2
+texture = SubResource("GradientTexture2D_mvtb1")
+texture_scale = 3.67
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1806549611]
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_fsjio")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1175010031]
+
+[node name="LandingDust" type="CPUParticles2D" parent="." unique_id=1881930410]
+position = Vector2(0, 30)
+emitting = false
+amount = 10
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.9
+direction = Vector2(0, -1)
+spread = 40.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 40.0
+initial_velocity_max = 90.0
+scale_amount_min = 1.5
+scale_amount_max = 3.0
+color = Color(0.88235295, 0.87058824, 0.92941177, 1)
