@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://bbxrfcy50shwn"]
+
+[ext_resource type="Script" uid="uid://mn444eq7e6v0" path="res://scripts/controls_menu.gd" id="1_5qlyv"]
+[ext_resource type="Texture2D" uid="uid://b7kaxo8xf8uex" path="res://menu_background.png" id="1_kdy74"]
+
+[node name="ControlsMenu" type="Control" unique_id=1908965332]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5qlyv")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1541184655]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_kdy74")
+stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=133235529]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=989938748]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=971597199]
+layout_mode = 2
+text = "CONTROLS"
+
+[node name="RowMoveLeft" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=472576306]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/RowMoveLeft" unique_id=340182141]
+layout_mode = 2
+text = "Move Left"
+
+[node name="KeyButton" type="Button" parent="MarginContainer/VBoxContainer/RowMoveLeft" unique_id=1748871343]
+layout_mode = 2
+
+[node name="RowMoveRight" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=633659072]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/RowMoveRight" unique_id=858362194]
+layout_mode = 2
+text = "Move Right"
+
+[node name="KeyButton" type="Button" parent="MarginContainer/VBoxContainer/RowMoveRight" unique_id=360449459]
+layout_mode = 2
+
+[node name="RowJump" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=518272392]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/RowJump" unique_id=770882316]
+layout_mode = 2
+text = "Jump"
+
+[node name="KeyButton" type="Button" parent="MarginContainer/VBoxContainer/RowJump" unique_id=348266496]
+layout_mode = 2
+
+[node name="RowCrouch" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1643370679]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/RowCrouch" unique_id=950363250]
+layout_mode = 2
+text = "Crouch"
+
+[node name="KeyButton" type="Button" parent="MarginContainer/VBoxContainer/RowCrouch" unique_id=1417618254]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1185062043]
+layout_mode = 2
+text = "Back
+"

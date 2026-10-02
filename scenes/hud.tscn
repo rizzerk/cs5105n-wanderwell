@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dkd1ynjnvohu"]
+
+[ext_resource type="Script" uid="uid://boxamnv2vbv82" path="res://scripts/hud.gd" id="1_ahhtf"]
+
+[node name="Hud" type="CanvasLayer" unique_id=289061742]
+script = ExtResource("1_ahhtf")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=184948591]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1398922651]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26

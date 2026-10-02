@@ -195,3 +195,87 @@ small hops stay quiet and real falls kick up visible dust.
 * Lantern light follows the player and flips sides with facing direction.
 * Lantern flicker animation loops without stopping.
 * Crystal asset is lit and visible in at least one level.
+
+
+## Activity 5 — UI/UX & Audio
+
+**Goal:** An HUD, a main menu with restart/pause flow, SFX and music routed through audio buses, one accessibility feature, and a playtest-driven change.
+
+### HUD
+
+`scripts/hud.gd`, autoloaded as `Hud` (`scenes/hud.tscn`), so it persists across every scene change without being re-added per level.
+
+* A `CanvasLayer` → `MarginContainer` → `Label` showing elapsed time as `mm:ss`.
+* `elapsed` only increments while `running` is true.
+
+### Main Menu
+
+`scenes/main_menu.tscn` / `scripts/main_menu.gd`. Set as the project's Main Scene (Project Settings → Application → Run).
+
+| Button | Action |
+|---|---|
+| Start | Loads `levels/level_1.tscn` |
+| Controls | Loads `scenes/controls_menu.tscn` |
+| Quit | `get_tree().quit()` |
+
+### Pause Menu
+
+`scenes/pause_menu.tscn` / `scripts/pause_menu.gd`, autoloaded as `PauseMenu`. Root `CanvasLayer` has **Process Mode** set to `Always` so it still responds to input while the tree is paused.
+
+| Button | Action |
+|---|---|
+| Resume | Unpauses, hides the panel |
+| Restart Level | Unpauses, hides the panel, `reload_current_scene()` |
+| Main Menu | Unpauses, hides the panel, loads `scenes/main_menu.tscn` |
+| Quit | `get_tree().quit()` |
+
+
+### Audio
+
+Two buses in addition to Master: `Music`, `SFX` (Audio panel, bottom of editor).
+
+`scripts/audio_manager.gd`, autoloaded as `Audio` via `scenes/audio_manager.tscn` (`AudioManager` node with two `AudioStreamPlayer` children, `SFXPlayer` and `MusicPlayer`).
+
+All SFX and the music loop were synthesized directly with a Python script (sine sweeps, filtered noise, envelope shaping) rather than recorded or sourced externally — same procedural approach used for the tileset and character art.
+
+| Sound | File | Triggered from |
+|---|---|---|
+| Jump | `audio/jump.wav` | `player.gd`, on jump |
+| Land | `audio/land.wav` | `player.gd`, on landing |
+| Hurt | `audio/hurt.wav` | `player.gd`, `hurt()` |
+| Goal | `audio/goal.wav` | `goal.gd`, on reaching the goal |
+| Music | `audio/music_loop.wav` | `audio_manager.gd`, loops continuously |
+
+### Accessibility — Remappable Controls
+
+`scripts/settings.gd`, autoloaded as `Settings` (first in the autoload order, so bindings apply before any level loads).
+
+* On startup, loads `user://keybinds.cfg` if it exists and reassigns `move_left`, `move_right`, `jump`, `crouch` to the saved keys via `InputMap`.
+* `rebind(action, event)` updates the live `InputMap` and writes the new binding to disk immediately.
+* `scenes/controls_menu.tscn` / `scripts/controls_menu.gd`: one row per rebindable action, each showing the currently bound key. Clicking a row's button enters a listening state; the next key press rebinds that action and saves it.
+* Persists across restarts — verified by rebinding a key, fully closing and reopening the project, and confirming the new key still works without re-entering the Controls screen.
+
+### Controls
+
+| Action | Input Map name | Default binding | Rebindable |
+|---|---|---|---|
+| Move left | `move_left` | A / Left Arrow | Yes |
+| Move right | `move_right` | D / Right Arrow | Yes |
+| Jump | `jump` | Space | Yes |
+| Crouch | `crouch` | S / Down Arrow | Yes |
+| Pause | `pause` | Escape | No |
+
+
+### Testing Checklist
+
+- [ ] HUD timer counts up correctly and resets on "Play Again."
+- [ ] Main Menu Start/Controls/Quit all work.
+- [ ] Pause menu opens with Escape during gameplay.
+- [ ] Rebinding a key in Controls works immediately and survives restarting the game.
+- [ ] SFX play for jump, land, hurt, and goal.
+
+### Demo Video
+
+[**Watch the gameplay video**](screenshots/week5.mp4)
+
+<video src="screenshots/week5.mp4" controls width="600"></video>

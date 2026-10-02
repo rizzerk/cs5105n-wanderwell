@@ -126,6 +126,7 @@ func _physics_process(delta: float) -> void:
 		coyote_timer = 0.0
 		landing = false
 		_play("jump_start")
+		Audio.play_sfx("jump")
 	
 	var fall_speed := velocity.y  # her real falling speed, captured right before move_and_slide can zero it
 
@@ -136,6 +137,7 @@ func _physics_process(delta: float) -> void:
 		landing = true
 		_play("land")
 		anim_player.play("land_squash")
+		Audio.play_sfx("land") 
 		print("landed, fall_speed = ", fall_speed)
 		if fall_speed > 200.0:
 			landing_dust.restart()
@@ -205,6 +207,7 @@ func hurt() -> void:
 		return
 	dead = true
 	velocity = Vector2.ZERO
+	Audio.play_sfx("hurt") 
 	sprite.play("hurt")
 	await sprite.animation_finished
 	await get_tree().create_timer(0.15).timeout

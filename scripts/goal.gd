@@ -14,6 +14,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if triggered or not body.is_in_group("player"):
 		return
 	triggered = true
+	Audio.play_sfx("goal")
 	if next_level == "":
 		print("You win!")  # last level: show a win screen here
 	else:

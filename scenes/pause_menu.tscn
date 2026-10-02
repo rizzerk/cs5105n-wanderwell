@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://p0es654xn5bx"]
+
+[ext_resource type="Script" uid="uid://dk0n0xuy08dg7" path="res://scripts/pause_menu.gd" id="1_n87rw"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=2076727595]
+process_mode = 3
+script = ExtResource("1_n87rw")
+
+[node name="Control" type="Control" parent="." unique_id=170751791]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=851914362]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 181.0
+offset_right = 748.0
+offset_bottom = 460.0
+alignment = 1
+
+[node name="resume" type="Button" parent="Control/VBoxContainer" unique_id=526383364]
+layout_mode = 2
+text = "Resume"
+
+[node name="restart_level" type="Button" parent="Control/VBoxContainer" unique_id=2034993752]
+layout_mode = 2
+text = "Restart Level"
+
+[node name="main_menu" type="Button" parent="Control/VBoxContainer" unique_id=405633426]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="quit" type="Button" parent="Control/VBoxContainer" unique_id=960886590]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="Control/VBoxContainer/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/restart_level" to="." method="_on_restart_level_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/main_menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/quit" to="." method="_on_quit_pressed"]
