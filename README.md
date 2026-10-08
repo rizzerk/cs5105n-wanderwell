@@ -315,4 +315,5 @@ All SFX and the music loop were synthesized directly with a Python script (sine 
 ### Demo Video
 
 [**Watch the gameplay video**]
+
 https://github.com/user-attachments/assets/d453ec78-c181-4d2f-976f-1d1bc7bdfc7e
