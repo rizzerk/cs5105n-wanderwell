@@ -1,18 +1,72 @@
 [gd_scene format=3 uid="uid://dkd1ynjnvohu"]
 
 [ext_resource type="Script" uid="uid://boxamnv2vbv82" path="res://scripts/hud.gd" id="1_ahhtf"]
+[ext_resource type="Script" path="res://scripts/lives_display.gd" id="2_lives"]
+[ext_resource type="Theme" path="res://ui_theme.tres" id="3_theme"]
 
 [node name="Hud" type="CanvasLayer" unique_id=289061742]
 script = ExtResource("1_ahhtf")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=184948591]
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/margin_left = 16
+[node name="TopBar" type="MarginContainer" parent="." unique_id=184948591]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 66.0
+grow_horizontal = 2
+mouse_filter = 2
+theme = ExtResource("3_theme")
+theme_override_constants/margin_left = 22
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="MarginContainer" unique_id=1398922651]
+[node name="HBox" type="HBoxContainer" parent="TopBar" unique_id=1398922651]
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
+mouse_filter = 2
+theme_override_constants/separation = 22
+
+[node name="LevelLabel" type="Label" parent="TopBar/HBox" unique_id=1504116321]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HudLabel"
+text = "LEVEL 1/7  ·  FIRST LIGHT"
+
+[node name="Lives" type="Control" parent="TopBar/HBox" unique_id=1630712248]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_lives")
+
+[node name="TimeLabel" type="Label" parent="TopBar/HBox" unique_id=902117735]
+custom_minimum_size = Vector2(76, 0)
+layout_mode = 2
+theme_type_variation = &"HudLabel"
+text = "00:00"
+horizontal_alignment = 2
+
+[node name="TitleCard" type="CenterContainer" parent="." unique_id=1873390214]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("3_theme")
+
+[node name="VBox" type="VBoxContainer" parent="TitleCard" unique_id=774920613]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="Number" type="Label" parent="TitleCard/VBox" unique_id=1102938475]
+layout_mode = 2
+theme_type_variation = &"CardNumberLabel"
+text = "LEVEL 1"
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="TitleCard/VBox" unique_id=1938475610]
+layout_mode = 2
+theme_type_variation = &"CardNameLabel"
+text = "First Light"
+horizontal_alignment = 1

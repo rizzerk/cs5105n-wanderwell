@@ -1,0 +1,187 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/win_screen.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://b7kaxo8xf8uex" path="res://menu_background.png" id="2_bg"]
+[ext_resource type="Theme" path="res://ui_theme.tres" id="3_theme"]
+[ext_resource type="Texture2D" path="res://light_soft.tres" id="4_light"]
+[ext_resource type="SpriteFrames" uid="uid://b6os1kkwxa7qq" path="res://player_frames.tres" id="5_frames"]
+[ext_resource type="Script" path="res://scripts/menu_character.gd" id="6_hero"]
+
+[sub_resource type="Gradient" id="Gradient_sparks"]
+offsets = PackedFloat32Array(0, 0.15, 0.7, 1)
+colors = PackedColorArray(1, 0.9, 0.6, 0, 1, 0.9, 0.6, 1, 1, 0.75, 0.4, 0.7, 1, 0.6, 0.3, 0)
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+stretch_mode = 6
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.8, 0.72, 0.74, 1)
+
+[node name="ExitLight" type="PointLight2D" parent="."]
+position = Vector2(820, 40)
+color = Color(1, 0.82, 0.56, 1)
+energy = 1.2
+texture = ExtResource("4_light")
+texture_scale = 12.0
+
+[node name="Hero" type="Node2D" parent="."]
+position = Vector2(820, 403)
+script = ExtResource("6_hero")
+hop_every = 3.0
+hop_height = 90.0
+
+[node name="LanternLight" type="PointLight2D" parent="Hero"]
+position = Vector2(105, 100)
+color = Color(1, 0.8, 0.5, 1)
+energy = 0.9
+texture = ExtResource("4_light")
+texture_scale = 4.5
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Hero"]
+texture_filter = 1
+scale = Vector2(6, 6)
+sprite_frames = ExtResource("5_frames")
+animation = &"idle"
+
+[node name="Sparks" type="CanvasLayer" parent="."]
+
+[node name="Rising" type="CPUParticles2D" parent="Sparks"]
+position = Vector2(576, 680)
+amount = 60
+lifetime = 7.0
+preprocess = 7.0
+emission_shape = 3
+emission_rect_extents = Vector2(600, 20)
+direction = Vector2(0, -1)
+spread = 18.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 110.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color_ramp = SubResource("Gradient_sparks")
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Root" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("3_theme")
+
+[node name="Kicker" type="Label" parent="UI/Root"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 92.0
+offset_right = 700.0
+offset_bottom = 128.0
+theme_type_variation = &"CardNumberLabel"
+text = "Wanderwell - complete"
+
+[node name="Title" type="Label" parent="UI/Root"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 122.0
+offset_right = 760.0
+offset_bottom = 240.0
+theme_type_variation = &"TitleLabel"
+theme_override_font_sizes/font_size = 80
+text = "Out of the Dark"
+
+[node name="Subtitle" type="Label" parent="UI/Root"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 232.0
+offset_right = 760.0
+offset_bottom = 266.0
+theme_type_variation = &"SubtitleLabel"
+text = "All 7 levels cleared. The lantern made it home."
+
+[node name="Stats" type="PanelContainer" parent="UI/Root"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 296.0
+offset_right = 452.0
+offset_bottom = 440.0
+
+[node name="Grid" type="GridContainer" parent="UI/Root/Stats"]
+layout_mode = 2
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="TimeLabel" type="Label" parent="UI/Root/Stats/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"StatLabel"
+text = "Time"
+
+[node name="TimeValue" type="Label" parent="UI/Root/Stats/Grid"]
+layout_mode = 2
+theme_type_variation = &"StatValueLabel"
+text = "-"
+horizontal_alignment = 2
+
+[node name="DeathsLabel" type="Label" parent="UI/Root/Stats/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"StatLabel"
+text = "Deaths"
+
+[node name="DeathsValue" type="Label" parent="UI/Root/Stats/Grid"]
+layout_mode = 2
+theme_type_variation = &"StatValueLabel"
+text = "-"
+horizontal_alignment = 2
+
+[node name="LivesLabel" type="Label" parent="UI/Root/Stats/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"StatLabel"
+text = "Lanterns left"
+
+[node name="LivesValue" type="Label" parent="UI/Root/Stats/Grid"]
+layout_mode = 2
+theme_type_variation = &"StatValueLabel"
+text = "-"
+horizontal_alignment = 2
+
+[node name="Buttons" type="VBoxContainer" parent="UI/Root"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 468.0
+offset_right = 392.0
+offset_bottom = 608.0
+theme_override_constants/separation = 16
+
+[node name="play_again" type="Button" parent="UI/Root/Buttons"]
+layout_mode = 2
+text = "Play Again"
+
+[node name="main_menu" type="Button" parent="UI/Root/Buttons"]
+layout_mode = 2
+text = "Main Menu"
+
+[connection signal="pressed" from="UI/Root/Buttons/play_again" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="UI/Root/Buttons/main_menu" to="." method="_on_main_menu_pressed"]

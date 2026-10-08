@@ -22,6 +22,7 @@ buses/default_bus_layout="uid://difbcy6rlas5o"
 [autoload]
 
 Settings="*uid://bmxs5dh3i4pey"
+Game="*res://scripts/game.gd"
 Audio="*uid://vw6s2n3ucsnx"
 Hud="*uid://dkd1ynjnvohu"
 PauseMenu="*uid://p0es654xn5bx"

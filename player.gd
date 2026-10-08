@@ -207,11 +207,16 @@ func hurt() -> void:
 		return
 	dead = true
 	velocity = Vector2.ZERO
-	Audio.play_sfx("hurt") 
+	var out_of_lives := Game.lose_life()
+	Audio.play_sfx("hurt")
 	sprite.play("hurt")
 	await sprite.animation_finished
 	await get_tree().create_timer(0.15).timeout
+	if out_of_lives:
+		Game.game_over()
+		return
 	global_position = respawn_point
+	get_tree().call_group("enemies", "reset")  # send enemies home so they can't camp the respawn point
 	velocity = Vector2.ZERO
 	coyote_timer = 0.0
 	_set_crouch(false)

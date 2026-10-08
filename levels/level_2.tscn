@@ -10,7 +10,7 @@
 [node name="Main" type="Node2D" unique_id=608745778]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=305165503]
-color = Color(0.42358288, 0.42358288, 0.5370987, 1)
+color = Color(0.56, 0.56, 0.66, 1)
 
 [node name="Background" type="Sprite2D" parent="." unique_id=237152132]
 position = Vector2(628.2239, 348.5984)

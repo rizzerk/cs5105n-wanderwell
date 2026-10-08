@@ -1,0 +1,113 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://b7kaxo8xf8uex" path="res://menu_background.png" id="2_bg"]
+[ext_resource type="Theme" path="res://ui_theme.tres" id="3_theme"]
+[ext_resource type="Texture2D" path="res://light_soft.tres" id="4_light"]
+[ext_resource type="SpriteFrames" uid="uid://b6os1kkwxa7qq" path="res://player_frames.tres" id="5_frames"]
+[ext_resource type="Script" path="res://scripts/menu_character.gd" id="6_hero"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+stretch_mode = 6
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.22, 0.2, 0.32, 1)
+
+[node name="Hero" type="Node2D" parent="."]
+position = Vector2(820, 403)
+script = ExtResource("6_hero")
+rest_animation = &"crouch_idle"
+hop_every = 0.0
+
+[node name="Ember" type="PointLight2D" parent="Hero"]
+position = Vector2(105, 110)
+color = Color(1, 0.55, 0.3, 1)
+energy = 0.5
+texture = ExtResource("4_light")
+texture_scale = 2.2
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Hero"]
+texture_filter = 1
+scale = Vector2(6, 6)
+sprite_frames = ExtResource("5_frames")
+animation = &"crouch_idle"
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Root" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("3_theme")
+
+[node name="Title" type="Label" parent="UI/Root"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 104.0
+offset_right = 760.0
+offset_bottom = 320.0
+theme_type_variation = &"TitleLabel"
+theme_override_colors/font_color = Color(0.86, 0.82, 0.96, 1)
+theme_override_colors/font_shadow_color = Color(0.4, 0.3, 0.8, 0.25)
+theme_override_font_sizes/font_size = 76
+text = "Your lantern\nwent out"
+
+[node name="LevelLabel" type="Label" parent="UI/Root"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 318.0
+offset_right = 700.0
+offset_bottom = 352.0
+theme_type_variation = &"SubtitleLabel"
+text = "Level 1  ·  First Light"
+
+[node name="Hint" type="Label" parent="UI/Root"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 350.0
+offset_right = 700.0
+offset_bottom = 384.0
+theme_type_variation = &"SubtitleLabel"
+theme_override_colors/font_color = Color(0.55, 0.52, 0.72, 1)
+theme_override_font_sizes/font_size = 20
+text = "Try again with a full set of lanterns."
+
+[node name="Buttons" type="VBoxContainer" parent="UI/Root"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 420.0
+offset_right = 392.0
+offset_bottom = 560.0
+theme_override_constants/separation = 16
+
+[node name="retry" type="Button" parent="UI/Root/Buttons"]
+layout_mode = 2
+text = "Try Again"
+
+[node name="main_menu" type="Button" parent="UI/Root/Buttons"]
+layout_mode = 2
+text = "Main Menu"
+
+[connection signal="pressed" from="UI/Root/Buttons/retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="UI/Root/Buttons/main_menu" to="." method="_on_main_menu_pressed"]

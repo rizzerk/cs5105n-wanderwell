@@ -274,8 +274,45 @@ All SFX and the music loop were synthesized directly with a Python script (sine 
 - [ ] Rebinding a key in Controls works immediately and survives restarting the game.
 - [ ] SFX play for jump, land, hurt, and goal.
 
+## Activity 6 — AI & Enemies
+
+### Enemy: Shade
+- A floating enemy (no gravity) that patrols, chases the player on sight, and attacks in melee range. Attacks call the same `hurt()` used by spikes. The player can't fight back, so the Shade is avoided, not defeated.
+
+**State machine:** `PATROL → CHASE → ATTACK`, plus `HURT` (unused, left in for a future damageable version).
+- `PATROL`: floats between two `Marker2D` points.
+- `CHASE`: starts when the player enters `VisionArea` (radius 220). Flies straight at the player at 110 px/s (the player runs at 300).
+- `ATTACK`: starts when the player enters `AttackArea` (radius 34). Deals damage on a 1 s cooldown.
+- Returns to `PATROL` when `lose_sight_time` (2.5 s) runs out.
+
+**Respawn reset:** Shades join the `enemies` group. On respawn, the player calls `reset()` on all of them, so they return to their start position and can't camp the spawn point.
+
+### New Levels 4–7
+| Level | Name | New idea |
+|---|---|---|
+| 4 | The Climb | One-way platforms over a spike floor, crouch under a slab to the door |
+| 5 | Switchback | Three-floor descent with sunken spike pits and two crouch tunnels |
+| 6 | Something Below | First Shade, lurking under the floor; safe on stone, caught on the thin bridge |
+| 7 | The Shade Warren | Two Shades; tunnel openings over pits, a wall-protected climbing shaft |
+
+### Game flow & UI
+- **Level labels:** HUD shows `LEVEL n/7 - NAME`, and a title card fades in when a level starts.
+- **Lives:** 5 lanterns in the HUD. Each death puts one out. At 0 a game over screen offers *Try Again* (same level, full lives) or *Main Menu*.
+- **Darkness:** each level's `CanvasModulate` gets darker, from 0.70 (level 1) to 0.17 (level 7).
+- **Door:** `goal.tscn` has a pulsing warm `PointLight2D` and sparks, so the exit stays visible in the dark. Shades got a faint violet light so they can be seen too.
+- **Main menu:** the character large and idling with an occasional hop, a lantern glow, dust particles, and a drifting Shade. Keyboard navigation works.
+- **Win screen:** shown after level 7, with total time, deaths and lanterns left, plus *Play Again* / *Main Menu*.
+- **Fonts:** Pixelify Sans (titles) and Silkscreen (UI), both SIL Open Font License (`fonts/`).
+
+### AI-drafted vs. my changes
+- AI-drafted: `enemy.gd` state machine structure, sprite art generation, levels 4–7 layouts, respawn reset, HUD/lives/menus/win and game over screens, study comments in `enemy.gd`.
+- My changes: tuned patrol_speed/chase_speed, adjusted vision/attack radius, placed patrol markers for level layout, picked where Shade appears in the level, turned on looping for the  animations (`patrol`/`alert`/`attack`froze on the last frame).
+
+### Known issues
+- The chase timer is only refilled when the player *enters* vision, so a Shade gives up 2.5 s after first spotting you even if you're still close.
+- Vision is a plain circle, so Shades notice the player through walls (they still can't fly through them).
+
 ### Demo Video
 
-[**Watch the gameplay video**](screenshots/week5.mp4)
-
-<video src="screenshots/week5.mp4" controls width="600"></video>
+[**Watch the gameplay video**]
+https://github.com/user-attachments/assets/d453ec78-c181-4d2f-976f-1d1bc7bdfc7e

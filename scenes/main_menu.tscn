@@ -2,6 +2,51 @@
 
 [ext_resource type="Script" uid="uid://bdo21soq7hvs1" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Texture2D" uid="uid://b7kaxo8xf8uex" path="res://menu_background.png" id="2_ekxnf"]
+[ext_resource type="Theme" path="res://ui_theme.tres" id="3_theme"]
+[ext_resource type="Texture2D" path="res://light_soft.tres" id="4_light"]
+[ext_resource type="SpriteFrames" uid="uid://b6os1kkwxa7qq" path="res://player_frames.tres" id="5_frames"]
+[ext_resource type="Script" path="res://scripts/menu_character.gd" id="6_hero"]
+[ext_resource type="Texture2D" uid="uid://cy35nfj1not0d" path="res://enemy/shade_idle.png" id="7_shade"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0"]
+atlas = ExtResource("7_shade")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1"]
+atlas = ExtResource("7_shade")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2"]
+atlas = ExtResource("7_shade")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3"]
+atlas = ExtResource("7_shade")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_shade"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_dust"]
+offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
+colors = PackedColorArray(0.85, 0.8, 1, 0, 0.85, 0.8, 1, 0.55, 1, 0.85, 0.6, 0.45, 1, 0.85, 0.6, 0)
 
 [node name="MainMenu" type="Control" unique_id=533334043]
 layout_mode = 3
@@ -22,31 +67,123 @@ grow_vertical = 2
 texture = ExtResource("2_ekxnf")
 stretch_mode = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=425907280]
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1288140537]
+color = Color(0.5, 0.47, 0.66, 1)
+
+[node name="LampLight" type="PointLight2D" parent="." unique_id=650283114]
+position = Vector2(927, 168)
+color = Color(1, 0.76, 0.48, 1)
+texture = ExtResource("4_light")
+texture_scale = 6.5
+
+[node name="Shade" type="AnimatedSprite2D" parent="." unique_id=1720938465]
+modulate = Color(1, 1, 1, 0.9)
+texture_filter = 1
+position = Vector2(560, 300)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_shade")
+animation = &"idle"
+
+[node name="Hero" type="Node2D" parent="." unique_id=1093847561]
+position = Vector2(820, 403)
+script = ExtResource("6_hero")
+
+[node name="LanternLight" type="PointLight2D" parent="Hero" unique_id=377210946]
+position = Vector2(105, 100)
+color = Color(1, 0.8, 0.5, 1)
+energy = 1.25
+texture = ExtResource("4_light")
+texture_scale = 4.5
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Hero" unique_id=1928374650]
+texture_filter = 1
+scale = Vector2(6, 6)
+sprite_frames = ExtResource("5_frames")
+animation = &"idle"
+
+[node name="Dust" type="CanvasLayer" parent="." unique_id=1555019283]
+
+[node name="Motes" type="CPUParticles2D" parent="Dust" unique_id=1823749012]
+position = Vector2(576, 340)
+amount = 46
+lifetime = 9.0
+preprocess = 9.0
+emission_shape = 3
+emission_rect_extents = Vector2(620, 330)
+direction = Vector2(0.3, -1)
+spread = 60.0
+gravity = Vector2(0, -3)
+initial_velocity_min = 4.0
+initial_velocity_max = 14.0
+scale_amount_min = 1.5
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_dust")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1462839501]
+layer = 2
+
+[node name="Root" type="Control" parent="UI" unique_id=1748293056]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("3_theme")
+
+[node name="Title" type="Label" parent="UI/Root" unique_id=44700190]
 layout_mode = 0
-offset_left = 317.0
-offset_top = 131.0
-offset_right = 862.0
-offset_bottom = 492.0
-alignment = 1
-
-[node name="Label" type="Label" parent="VBoxContainer" unique_id=44700190]
-layout_mode = 2
+offset_left = 84.0
+offset_top = 96.0
+offset_right = 720.0
+offset_bottom = 214.0
+theme_type_variation = &"TitleLabel"
 text = "Wanderwell"
-horizontal_alignment = 1
 
-[node name="start" type="Button" parent="VBoxContainer" unique_id=1629166890]
+[node name="Tagline" type="Label" parent="UI/Root" unique_id=1203948576]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 210.0
+offset_right = 640.0
+offset_bottom = 244.0
+theme_type_variation = &"SubtitleLabel"
+text = "Carry the light. Mind the dark."
+
+[node name="Buttons" type="VBoxContainer" parent="UI/Root" unique_id=425907280]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 300.0
+offset_right = 392.0
+offset_bottom = 520.0
+theme_override_constants/separation = 16
+
+[node name="start" type="Button" parent="UI/Root/Buttons" unique_id=1629166890]
 layout_mode = 2
 text = "Start"
 
-[node name="controls" type="Button" parent="VBoxContainer" unique_id=608685499]
+[node name="controls" type="Button" parent="UI/Root/Buttons" unique_id=608685499]
 layout_mode = 2
 text = "Controls"
 
-[node name="quit" type="Button" parent="VBoxContainer" unique_id=1677005837]
+[node name="quit" type="Button" parent="UI/Root/Buttons" unique_id=1677005837]
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="VBoxContainer/start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/controls" to="." method="_on_controls_pressed"]
-[connection signal="pressed" from="VBoxContainer/quit" to="." method="_on_quit_pressed"]
+[node name="Footer" type="Label" parent="UI/Root" unique_id=1938201746]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 92.0
+offset_top = -46.0
+offset_right = 600.0
+offset_bottom = -18.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.55, 0.52, 0.72, 1)
+theme_override_font_sizes/font_size = 14
+text = "Arrows + Enter or mouse to choose  -  CS-5105N"
+
+[connection signal="pressed" from="UI/Root/Buttons/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="UI/Root/Buttons/controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="UI/Root/Buttons/quit" to="." method="_on_quit_pressed"]
