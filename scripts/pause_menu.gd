@@ -4,7 +4,6 @@ extends CanvasLayer
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		print("escape pressed")
 		if not panel.visible and not Hud.running:
 			return  # only pause during a level, not on menus / win / game over screens
 		_toggle()
@@ -27,4 +26,4 @@ func _on_main_menu_pressed() -> void:
 	Game.to_main_menu()
 
 func _on_quit_pressed() -> void:
-	get_tree().quit()
+	Game.quit()  # saves first

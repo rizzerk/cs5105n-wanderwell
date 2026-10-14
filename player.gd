@@ -15,6 +15,7 @@ extends CharacterBody2D
 # --- Juice ---
 @export var squash_amount: Vector2 = Vector2(1.1, 0.9)  # the land animation already squashes, so keep this mild
 @export var squash_recover_speed: float = 8.0
+@export var hard_land_speed: float = 600.0  # falls faster than this (px/s) shake the screen
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collider: CollisionShape2D = $CollisionShape2D
@@ -90,6 +91,10 @@ func _build_animations() -> void:
 	
 func _physics_process(delta: float) -> void:
 	if dead:
+		# no control while hurt, but she still falls instead of hanging in the air
+		velocity.x = 0.0
+		velocity.y = 0.0 if is_on_floor() else velocity.y + gravity * delta
+		move_and_slide()
 		return
 
 	# --- Gravity ---
@@ -137,12 +142,13 @@ func _physics_process(delta: float) -> void:
 		landing = true
 		_play("land")
 		anim_player.play("land_squash")
-		Audio.play_sfx("land") 
-		print("landed, fall_speed = ", fall_speed)
+		Audio.play_sfx("land")
 		if fall_speed > 200.0:
 			landing_dust.restart()
 			landing_dust.emitting = true
-			print("dust triggered, velocity.y = ", velocity.y)
+		if fall_speed > hard_land_speed:
+			# the longer the drop, the bigger the thud (a 3-tile drop lands at ~680 px/s)
+			Juice.shake(remap(minf(fall_speed, 900.0), hard_land_speed, 900.0, 2.0, 6.0), 0.18)
 	was_on_floor = is_on_floor()
 
 
@@ -209,6 +215,8 @@ func hurt() -> void:
 	velocity = Vector2.ZERO
 	var out_of_lives := Game.lose_life()
 	Audio.play_sfx("hurt")
+	Juice.hit_stop(0.12)  # freeze on the hit so it registers, then the hurt animation plays
+	Juice.shake(12.0 if out_of_lives else 8.0, 0.35)
 	sprite.play("hurt")
 	await sprite.animation_finished
 	await get_tree().create_timer(0.15).timeout

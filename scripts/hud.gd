@@ -8,11 +8,13 @@ extends CanvasLayer
 @onready var title_card: Control = $TitleCard
 @onready var card_number: Label = $TitleCard/VBox/Number
 @onready var card_name: Label = $TitleCard/VBox/Name
+@onready var saved_label: Label = $SavedLabel
 
 var elapsed: float = 0.0
 var running: bool = false  # only counts while a level is loaded
 var _card_level: int = -1
 var _card_tween: Tween
+var _saved_tween: Tween
 
 
 func _ready() -> void:
@@ -59,3 +61,17 @@ func _show_title_card(index: int) -> void:
 	_card_tween.tween_property(title_card, "modulate:a", 1.0, 0.5)
 	_card_tween.tween_interval(1.4)
 	_card_tween.tween_property(title_card, "modulate:a", 0.0, 0.8)
+
+
+# Small "Progress saved" note that rises in at the bottom right and fades away
+func show_saved() -> void:
+	if _saved_tween:
+		_saved_tween.kill()
+	var rest_y := saved_label.position.y
+	saved_label.modulate.a = 0.0
+	saved_label.position.y = rest_y + 10.0
+	_saved_tween = create_tween().set_parallel()
+	_saved_tween.tween_property(saved_label, "modulate:a", 1.0, 0.3)
+	_saved_tween.tween_property(saved_label, "position:y", rest_y, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_saved_tween.chain().tween_interval(1.2)
+	_saved_tween.chain().tween_property(saved_label, "modulate:a", 0.0, 0.6)

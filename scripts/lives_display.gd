@@ -20,6 +20,11 @@ func set_lives(value: int, animate: bool = true) -> void:
 		var t := create_tween()
 		t.tween_property(self, "_fade", 0.0, 0.9)
 		t.tween_callback(func() -> void: _fading = -1)
+		# the whole row jumps, so a lost life is noticed even mid-jump
+		pivot_offset = size / 2.0
+		var pop := create_tween()
+		pop.tween_property(self, "scale", Vector2(1.3, 1.3), 0.08).set_ease(Tween.EASE_OUT)
+		pop.tween_property(self, "scale", Vector2.ONE, 0.4).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	lives = value
 	queue_redraw()
 

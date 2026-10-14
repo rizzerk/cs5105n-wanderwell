@@ -70,3 +70,22 @@ layout_mode = 2
 theme_type_variation = &"CardNameLabel"
 text = "First Light"
 horizontal_alignment = 1
+
+[node name="SavedLabel" type="Label" parent="." unique_id=1647203958]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -52.0
+offset_right = -22.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme = ExtResource("3_theme")
+theme_type_variation = &"HudLabel"
+text = "Progress saved"
+horizontal_alignment = 2

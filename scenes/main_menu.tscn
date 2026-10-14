@@ -158,6 +158,10 @@ offset_right = 392.0
 offset_bottom = 520.0
 theme_override_constants/separation = 16
 
+[node name="continue" type="Button" parent="UI/Root/Buttons" unique_id=1394827561]
+layout_mode = 2
+text = "Continue"
+
 [node name="start" type="Button" parent="UI/Root/Buttons" unique_id=1629166890]
 layout_mode = 2
 text = "Start"
@@ -184,6 +188,7 @@ theme_override_colors/font_color = Color(0.55, 0.52, 0.72, 1)
 theme_override_font_sizes/font_size = 14
 text = "Arrows + Enter or mouse to choose  -  CS-5105N"
 
+[connection signal="pressed" from="UI/Root/Buttons/continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="UI/Root/Buttons/start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="UI/Root/Buttons/controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="UI/Root/Buttons/quit" to="." method="_on_quit_pressed"]

@@ -26,6 +26,7 @@ Game="*res://scripts/game.gd"
 Audio="*uid://vw6s2n3ucsnx"
 Hud="*uid://dkd1ynjnvohu"
 PauseMenu="*uid://p0es654xn5bx"
+Juice="*res://scripts/juice.gd"
 
 [display]
 

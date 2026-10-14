@@ -317,3 +317,19 @@ All SFX and the music loop were synthesized directly with a Python script (sine 
 [**Watch the gameplay video**]
 
 https://github.com/user-attachments/assets/d453ec78-c181-4d2f-976f-1d1bc7bdfc7e
+
+## Activity 7 — Juice, Save/Load & Optimization
+
+### Juice
+- **Screen-shake** when hurt, and a small one on big falls (`scripts/juice.gd`, autoloaded as `Juice`).
+- **Hit-stop:** the game slows to 5% speed for 0.12 s when she gets hurt.
+- **Tweens:** the door flares when reached, the lantern row bounces when a life is lost, and a "Progress saved" message fades in at level start.
+
+### Save / Load
+- Progress is saved to `user://savegame.json` (level, lives, deaths, time) when a level starts, when a life is lost, and when quitting.
+- The main menu shows **Continue - Level N** when a save exists. Finishing the game deletes the save.
+
+### Optimization
+- Profiling showed the biggest cost was loading a level: up to 80 ms in one frame (dropped frames).
+- Fix: the next level now loads in the background while you play (`ResourceLoader.load_threaded_request`). Menu → Level 1 went from 34–62 ms to 5–9 ms.
+
