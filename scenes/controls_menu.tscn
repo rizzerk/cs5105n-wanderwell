@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://mn444eq7e6v0" path="res://scripts/controls_menu.gd" id="1_5qlyv"]
 [ext_resource type="Texture2D" uid="uid://b7kaxo8xf8uex" path="res://menu_background.png" id="1_kdy74"]
+[ext_resource type="Theme" path="res://ui_theme.tres" id="3_theme"]
+
+[sub_resource type="Gradient" id="Gradient_dust"]
+offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
+colors = PackedColorArray(0.85, 0.8, 1, 0, 0.85, 0.8, 1, 0.55, 1, 0.85, 0.6, 0.45, 1, 0.85, 0.6, 0)
 
 [node name="ControlsMenu" type="Control" unique_id=1908965332]
 layout_mode = 3
@@ -22,67 +27,131 @@ grow_vertical = 2
 texture = ExtResource("1_kdy74")
 stretch_mode = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=133235529]
-layout_mode = 1
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1402275561]
+color = Color(0.5, 0.47, 0.66, 1)
+
+[node name="Dust" type="CanvasLayer" parent="." unique_id=1730481926]
+
+[node name="Motes" type="CPUParticles2D" parent="Dust" unique_id=693015732]
+position = Vector2(576, 340)
+amount = 46
+lifetime = 9.0
+preprocess = 9.0
+emission_shape = 3
+emission_rect_extents = Vector2(620, 330)
+direction = Vector2(0.3, -1)
+spread = 60.0
+gravity = Vector2(0, -3)
+initial_velocity_min = 4.0
+initial_velocity_max = 14.0
+scale_amount_min = 1.5
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_dust")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=133235529]
+layer = 2
+
+[node name="Root" type="Control" parent="UI" unique_id=989938748]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 60
-theme_override_constants/margin_top = 60
-theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 60
+mouse_filter = 2
+theme = ExtResource("3_theme")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=989938748]
-layout_mode = 2
-theme_override_constants/separation = 20
+[node name="Center" type="CenterContainer" parent="UI/Root" unique_id=971597199]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=971597199]
-layout_mode = 2
-text = "CONTROLS"
-
-[node name="RowMoveLeft" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=472576306]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/RowMoveLeft" unique_id=340182141]
-layout_mode = 2
-text = "Move Left"
-
-[node name="KeyButton" type="Button" parent="MarginContainer/VBoxContainer/RowMoveLeft" unique_id=1748871343]
+[node name="Panel" type="PanelContainer" parent="UI/Root/Center" unique_id=472576306]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 
-[node name="RowMoveRight" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=633659072]
+[node name="VBox" type="VBoxContainer" parent="UI/Root/Center/Panel" unique_id=340182141]
 layout_mode = 2
+theme_override_constants/separation = 14
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/RowMoveRight" unique_id=858362194]
+[node name="Title" type="Label" parent="UI/Root/Center/Panel/VBox" unique_id=1748871343]
 layout_mode = 2
-text = "Move Right"
+theme_type_variation = &"CardNameLabel"
+theme_override_font_sizes/font_size = 52
+text = "Controls"
+horizontal_alignment = 1
 
-[node name="KeyButton" type="Button" parent="MarginContainer/VBoxContainer/RowMoveRight" unique_id=360449459]
+[node name="Hint" type="Label" parent="UI/Root/Center/Panel/VBox" unique_id=633659072]
 layout_mode = 2
+theme_type_variation = &"SubtitleLabel"
+text = "Select a key, then press the new one"
+horizontal_alignment = 1
 
-[node name="RowJump" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=518272392]
+[node name="Header" type="HBoxContainer" parent="UI/Root/Center/Panel/VBox" unique_id=858362194]
 layout_mode = 2
+theme_override_constants/separation = 12
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/RowJump" unique_id=770882316]
+[node name="Action" type="Label" parent="UI/Root/Center/Panel/VBox/Header" unique_id=360449459]
 layout_mode = 2
-text = "Jump"
+size_flags_horizontal = 3
+theme_type_variation = &"StatLabel"
+text = "Action"
 
-[node name="KeyButton" type="Button" parent="MarginContainer/VBoxContainer/RowJump" unique_id=348266496]
+[node name="Key" type="Label" parent="UI/Root/Center/Panel/VBox/Header" unique_id=518272392]
+custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
+theme_type_variation = &"StatLabel"
+text = "Key"
+horizontal_alignment = 1
 
-[node name="RowCrouch" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1643370679]
+[node name="Alt" type="Label" parent="UI/Root/Center/Panel/VBox/Header" unique_id=770882316]
+custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
+theme_type_variation = &"StatLabel"
+text = "Alt key"
+horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/RowCrouch" unique_id=950363250]
+[node name="Grid" type="GridContainer" parent="UI/Root/Center/Panel/VBox" unique_id=348266496]
 layout_mode = 2
-text = "Crouch"
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 10
+columns = 3
 
-[node name="KeyButton" type="Button" parent="MarginContainer/VBoxContainer/RowCrouch" unique_id=1417618254]
+[node name="Note" type="Label" parent="UI/Root/Center/Panel/VBox" unique_id=1643370679]
 layout_mode = 2
+theme_type_variation = &"StatLabel"
+theme_override_font_sizes/font_size = 14
+text = "Pause is always Esc"
+horizontal_alignment = 1
 
-[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1185062043]
+[node name="Buttons" type="HBoxContainer" parent="UI/Root/Center/Panel/VBox" unique_id=950363250]
 layout_mode = 2
-text = "Back
-"
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ResetButton" type="Button" parent="UI/Root/Center/Panel/VBox/Buttons" unique_id=1417618254]
+layout_mode = 2
+text = "Reset to Defaults"
+
+[node name="BackButton" type="Button" parent="UI/Root/Center/Panel/VBox/Buttons" unique_id=1185062043]
+layout_mode = 2
+text = "Back"
+
+[node name="Footer" type="Label" parent="UI/Root" unique_id=1938201747]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 92.0
+offset_top = -46.0
+offset_right = 600.0
+offset_bottom = -18.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.55, 0.52, 0.72, 1)
+theme_override_font_sizes/font_size = 14
+text = "Arrows + Enter or mouse to choose  -  Esc to go back"

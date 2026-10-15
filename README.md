@@ -259,11 +259,11 @@ All SFX and the music loop were synthesized directly with a Python script (sine 
 
 | Action | Input Map name | Default binding | Rebindable |
 |---|---|---|---|
-| Move left | `move_left` | A / Left Arrow | Yes |
-| Move right | `move_right` | D / Right Arrow | Yes |
-| Jump | `jump` | Space | Yes |
-| Crouch | `crouch` | S / Down Arrow | Yes |
-| Pause | `pause` | Escape | No |
+| Move left | `move_left` | A / Left Arrow | Yes (2 keys) |
+| Move right | `move_right` | D / Right Arrow | Yes (2 keys) |
+| Jump | `jump` | Space | Yes (2 keys) |
+| Crouch | `crouch` | S / Down Arrow | Yes (2 keys) |
+| Pause | `pause` | Escape | No, always Esc |
 
 
 ### Testing Checklist
@@ -352,3 +352,10 @@ https://github.com/user-attachments/assets/d453ec78-c181-4d2f-976f-1d1bc7bdfc7e
 - Web uses the **single-threaded** template so it runs without special server headers (works on itch.io / GitHub Pages).
 - Enabled **ETC2/ASTC** texture import, required for Apple Silicon Macs.
 - Builds are stored with Git LFS because the Windows `.exe` is over GitHub's 100 MB file limit.
+
+### Controls menu redesign
+- Restyled the Controls screen to match the main menu: same theme, background and dust, with the keys in a panel.
+- Each action now has **two key slots** (Key + Alt key). Before, rebinding replaced *both* default keys (e.g. A and Left Arrow) with one.
+- A key can only do one thing: binding it to a new action removes it from the old one.
+- **Esc** cancels while waiting for a key, otherwise goes back. Added **Reset to Defaults**.
+- Old Week 5 keybind saves still load.
