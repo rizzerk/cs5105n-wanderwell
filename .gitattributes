@@ -6,3 +6,8 @@
 *.jpeg filter=lfs diff=lfs merge=lfs -text
 *.webp filter=lfs diff=lfs merge=lfs -text
 *.ogg filter=lfs diff=lfs merge=lfs -text
+# Exported builds
+builds/**/*.exe filter=lfs diff=lfs merge=lfs -text
+builds/**/*.pck filter=lfs diff=lfs merge=lfs -text
+builds/**/*.wasm filter=lfs diff=lfs merge=lfs -text
+builds/**/*.zip filter=lfs diff=lfs merge=lfs -text
