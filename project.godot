@@ -32,7 +32,7 @@ TouchControls="*res://scenes/touch_controls.tscn"
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep"
 
 [input]
 
