@@ -257,13 +257,13 @@ All SFX and the music loop were synthesized directly with a Python script (sine 
 
 ### Controls
 
-| Action | Input Map name | Default binding | Rebindable |
-|---|---|---|---|
-| Move left | `move_left` | A / Left Arrow | Yes |
-| Move right | `move_right` | D / Right Arrow | Yes |
-| Jump | `jump` | Space | Yes |
-| Crouch | `crouch` | S / Down Arrow | Yes |
-| Pause | `pause` | Escape | No |
+| Action | Input Map name | Default binding | Touch | Rebindable |
+|---|---|---|---|---|
+| Move left | `move_left` | A / Left Arrow | ◀ (bottom left) | Yes |
+| Move right | `move_right` | D / Right Arrow | ▶ (bottom left) | Yes |
+| Jump | `jump` | Space | ▲ (bottom right) | Yes |
+| Crouch | `crouch` | S / Down Arrow | ▼ (bottom right) | Yes |
+| Pause | `pause` | Escape | ❚❚ (top right) | No |
 
 
 ### Testing Checklist
@@ -351,4 +351,5 @@ https://github.com/user-attachments/assets/d453ec78-c181-4d2f-976f-1d1bc7bdfc7e
 - Switched the renderer from Forward+ to **Compatibility**, since Web exports only support Compatibility.
 - Web uses the **single-threaded** template so it runs without special server headers (works on itch.io / GitHub Pages).
 - Enabled **ETC2/ASTC** texture import, required for Apple Silicon Macs.
+- **Touch controls** (`scenes/touch_controls.tscn`, autoloaded as `TouchControls`): on-screen ◀ ▶ ▼ ▲ and pause buttons for phones and tablets. They use `TouchScreenButton`, which sends the same Input Map actions as the keyboard, so `player.gd` didn't change. They only appear on touchscreens and only during a level. The hit areas are slightly bigger than the buttons to make them easier to hit.
 - Builds are stored with Git LFS because the Windows `.exe` is over GitHub's 100 MB file limit.
