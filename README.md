@@ -333,3 +333,22 @@ https://github.com/user-attachments/assets/d453ec78-c181-4d2f-976f-1d1bc7bdfc7e
 - Profiling showed the biggest cost was loading a level: up to 80 ms in one frame (dropped frames).
 - Fix: the next level now loads in the background while you play (`ResourceLoader.load_threaded_request`). Menu → Level 1 went from 34–62 ms to 5–9 ms.
 
+## Activity 8 — Multi-Platform Export & Team Git
+
+### Exports
+| Platform | Build | Tested |
+|---|---|---|
+| macOS | `builds/macos/Wanderwell.zip` | ✅ Runs on an M1 Mac |
+| Web | `builds/web/index.html` | ✅ Runs in Chrome |
+| Windows | `builds/windows/Wanderwell.exe` | Exported, not yet tested |
+
+**How to run**
+- **macOS:** unzip, then right-click `Wanderwell.app` → Open (the app isn't signed).
+- **Web:** serve the folder, e.g. `python3 -m http.server` inside `builds/web/`, then open `localhost:8000`. Opening `index.html` directly doesn't work.
+- **Windows:** keep `Wanderwell.exe` and `Wanderwell.pck` in the same folder and run the `.exe`.
+
+### Platform tweaks
+- Switched the renderer from Forward+ to **Compatibility**, since Web exports only support Compatibility.
+- Web uses the **single-threaded** template so it runs without special server headers (works on itch.io / GitHub Pages).
+- Enabled **ETC2/ASTC** texture import, required for Apple Silicon Macs.
+- Builds are stored with Git LFS because the Windows `.exe` is over GitHub's 100 MB file limit.
