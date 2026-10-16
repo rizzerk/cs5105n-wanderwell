@@ -27,11 +27,12 @@ Audio="*uid://vw6s2n3ucsnx"
 Hud="*uid://dkd1ynjnvohu"
 PauseMenu="*uid://p0es654xn5bx"
 Juice="*res://scripts/juice.gd"
+TouchControls="*res://scenes/touch_controls.tscn"
 
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep"
 
 [input]
 
