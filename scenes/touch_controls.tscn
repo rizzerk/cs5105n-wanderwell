@@ -1,0 +1,98 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/touch_controls.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://ui/touch/left_normal.svg" id="2_left"]
+[ext_resource type="Texture2D" path="res://ui/touch/left_pressed.svg" id="3_left_p"]
+[ext_resource type="Texture2D" path="res://ui/touch/right_normal.svg" id="4_right"]
+[ext_resource type="Texture2D" path="res://ui/touch/right_pressed.svg" id="5_right_p"]
+[ext_resource type="Texture2D" path="res://ui/touch/up_normal.svg" id="6_up"]
+[ext_resource type="Texture2D" path="res://ui/touch/up_pressed.svg" id="7_up_p"]
+[ext_resource type="Texture2D" path="res://ui/touch/down_normal.svg" id="8_down"]
+[ext_resource type="Texture2D" path="res://ui/touch/down_pressed.svg" id="9_down_p"]
+[ext_resource type="Texture2D" path="res://ui/touch/pause_normal.svg" id="10_pause"]
+[ext_resource type="Texture2D" path="res://ui/touch/pause_pressed.svg" id="11_pause_p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
+size = Vector2(112, 112)
+
+[node name="TouchControls" type="CanvasLayer"]
+script = ExtResource("1_script")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BottomLeft" type="Control" parent="Root"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Left" type="TouchScreenButton" parent="Root/BottomLeft"]
+position = Vector2(28, -124)
+texture_normal = ExtResource("2_left")
+texture_pressed = ExtResource("3_left_p")
+shape = SubResource("RectangleShape2D_hit")
+passby_press = true
+action = "move_left"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="Root/BottomLeft"]
+position = Vector2(140, -124)
+texture_normal = ExtResource("4_right")
+texture_pressed = ExtResource("5_right_p")
+shape = SubResource("RectangleShape2D_hit")
+passby_press = true
+action = "move_right"
+visibility_mode = 1
+
+[node name="BottomRight" type="Control" parent="Root"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Crouch" type="TouchScreenButton" parent="Root/BottomRight"]
+position = Vector2(-236, -124)
+texture_normal = ExtResource("8_down")
+texture_pressed = ExtResource("9_down_p")
+shape = SubResource("RectangleShape2D_hit")
+action = "crouch"
+visibility_mode = 1
+
+[node name="Jump" type="TouchScreenButton" parent="Root/BottomRight"]
+position = Vector2(-124, -124)
+texture_normal = ExtResource("6_up")
+texture_pressed = ExtResource("7_up_p")
+shape = SubResource("RectangleShape2D_hit")
+action = "jump"
+visibility_mode = 1
+
+[node name="TopRight" type="Control" parent="Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="Pause" type="TouchScreenButton" parent="Root/TopRight"]
+position = Vector2(-94, 76)
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("10_pause")
+texture_pressed = ExtResource("11_pause_p")
+shape = SubResource("RectangleShape2D_hit")
+action = "ui_cancel"
+visibility_mode = 1
