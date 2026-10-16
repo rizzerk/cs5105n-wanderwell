@@ -1,45 +1,113 @@
 extends Control
+# Controls screen: two key slots per action. Select a slot, then press the new key.
+# Esc cancels while waiting for a key, otherwise goes back to the main menu.
 
-@onready var buttons := {
-	"move_left": $MarginContainer/VBoxContainer/RowMoveLeft/KeyButton,
-	"move_right": $MarginContainer/VBoxContainer/RowMoveRight/KeyButton,
-	"jump": $MarginContainer/VBoxContainer/RowJump/KeyButton,
-	"crouch": $MarginContainer/VBoxContainer/RowCrouch/KeyButton,
-}
-@onready var back_button: Button = $MarginContainer/VBoxContainer/BackButton
+const ACTIONS := [
+	["move_left", "Move Left"],
+	["move_right", "Move Right"],
+	["jump", "Jump"],
+	["crouch", "Crouch"],
+]
 
+@onready var grid: GridContainer = $UI/Root/Center/Panel/VBox/Grid
+@onready var hint: Label = $UI/Root/Center/Panel/VBox/Hint
+@onready var reset_button: Button = $UI/Root/Center/Panel/VBox/Buttons/ResetButton
+@onready var back_button: Button = $UI/Root/Center/Panel/VBox/Buttons/BackButton
+@onready var ui_root: Control = $UI/Root
+
+var slot_buttons := {}  # action -> [Button, Button]
 var listening_for: String = ""
+var listening_slot: int = -1
+var _hint_text: String
+var _pulse: Tween
 
 
 func _ready() -> void:
-	for action in buttons:
-		_refresh_button(action)
-		# connect each button's click to a listening function, remembering which action it's for
-		buttons[action].pressed.connect(_on_key_button_pressed.bind(action))
+	_hint_text = hint.text
+	for pair in ACTIONS:
+		_add_row(pair[0], pair[1])
+	_refresh_all()
+	reset_button.pressed.connect(_on_reset_pressed)
 	back_button.pressed.connect(_on_back_pressed)
+	slot_buttons[ACTIONS[0][0]][0].grab_focus()  # keyboard / controller can start right away
+	ui_root.modulate.a = 0.0
+	create_tween().tween_property(ui_root, "modulate:a", 1.0, 0.4)
 
 
-func _refresh_button(action: String) -> void:
-	var events := InputMap.action_get_events(action)
-	if events.size() > 0:
-		buttons[action].text = events[0].as_text()
-	else:
-		buttons[action].text = "Unbound"
+func _add_row(action: String, label_text: String) -> void:
+	var label := Label.new()
+	label.text = label_text
+	label.theme_type_variation = &"StatValueLabel"
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	grid.add_child(label)
+
+	slot_buttons[action] = []
+	for slot in Settings.SLOTS:
+		var button := Button.new()
+		button.custom_minimum_size = Vector2(170, 0)
+		button.pressed.connect(_on_slot_pressed.bind(action, slot))
+		grid.add_child(button)
+		slot_buttons[action].append(button)
 
 
-func _on_key_button_pressed(action: String) -> void:
+func _refresh_all() -> void:
+	for action in slot_buttons:
+		var keys := Settings.get_keys(action)
+		for slot in Settings.SLOTS:
+			slot_buttons[action][slot].text = Settings.key_name(keys[slot]) if slot < keys.size() else "-"
+
+
+func _on_slot_pressed(action: String, slot: int) -> void:
+	_stop_listening()
 	listening_for = action
-	buttons[action].text = "Press a key..."
+	listening_slot = slot
+	var button: Button = slot_buttons[action][slot]
+	button.text = "Press a key"
+	hint.text = "Press a key for %s  -  Esc to cancel" % _action_label(action)
+	_pulse = create_tween().set_loops()
+	_pulse.tween_property(button, "modulate:a", 0.45, 0.45)
+	_pulse.tween_property(button, "modulate:a", 1.0, 0.45)
 
 
 func _input(event: InputEvent) -> void:
-	if listening_for == "":
+	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
-	if event is InputEventKey and event.pressed and not event.echo:
-		Settings.rebind(listening_for, event)
-		_refresh_button(listening_for)
-		listening_for = ""
-		get_viewport().set_input_as_handled()
+	if listening_for == "":
+		if event.is_action_pressed("ui_cancel"):
+			get_viewport().set_input_as_handled()
+			_on_back_pressed()
+		return
+	get_viewport().set_input_as_handled()
+	if event.is_action_pressed("ui_cancel"):
+		_stop_listening()
+		return
+	var keycode: int = event.physical_keycode if event.physical_keycode != 0 else event.keycode
+	Settings.rebind(listening_for, listening_slot, keycode)
+	_stop_listening()
+
+
+func _stop_listening() -> void:
+	if _pulse:
+		_pulse.kill()
+	if listening_for != "":
+		slot_buttons[listening_for][listening_slot].modulate.a = 1.0
+	listening_for = ""
+	listening_slot = -1
+	hint.text = _hint_text
+	_refresh_all()
+
+
+func _action_label(action: String) -> String:
+	for pair in ACTIONS:
+		if pair[0] == action:
+			return pair[1]
+	return action
+
+
+func _on_reset_pressed() -> void:
+	_stop_listening()
+	Settings.reset_to_defaults()
+	_refresh_all()
 
 
 func _on_back_pressed() -> void:

@@ -259,11 +259,11 @@ All SFX and the music loop were synthesized directly with a Python script (sine 
 
 | Action | Input Map name | Default binding | Touch | Rebindable |
 |---|---|---|---|---|
-| Move left | `move_left` | A / Left Arrow | ◀ (bottom left) | Yes |
-| Move right | `move_right` | D / Right Arrow | ▶ (bottom left) | Yes |
-| Jump | `jump` | Space | ▲ (bottom right) | Yes |
-| Crouch | `crouch` | S / Down Arrow | ▼ (bottom right) | Yes |
-| Pause | `pause` | Escape | ❚❚ (top right) | No |
+| Move left | `move_left` | A / Left Arrow | ◀ (bottom left) | Yes (2 keys) |
+| Move right | `move_right` | D / Right Arrow | ▶ (bottom left) | Yes (2 keys) |
+| Jump | `jump` | Space | ▲ (bottom right) | Yes (2 keys) |
+| Crouch | `crouch` | S / Down Arrow | ▼ (bottom right) | Yes (2 keys) |
+| Pause | `pause` | Escape | ❚❚ (top right) | No, always Esc |
 
 
 ### Testing Checklist
@@ -354,3 +354,10 @@ https://github.com/user-attachments/assets/d453ec78-c181-4d2f-976f-1d1bc7bdfc7e
 - **Touch controls** (`scenes/touch_controls.tscn`, autoloaded as `TouchControls`): on-screen ◀ ▶ ▼ ▲ and pause buttons for phones and tablets. They use `TouchScreenButton`, which sends the same Input Map actions as the keyboard, so `player.gd` didn't change. They only appear on touchscreens and only during a level. The hit areas are slightly bigger than the buttons to make them easier to hit.
 - **Stretch aspect** changed from `expand` to `keep`: the levels are built for 16:9, so on wider or taller phones the whole level now scales to fit with black bars, instead of showing empty space past the level edge.
 - Builds are stored with Git LFS because the Windows `.exe` is over GitHub's 100 MB file limit.
+
+### Controls menu redesign
+- Restyled the Controls screen to match the main menu: same theme, background and dust, with the keys in a panel.
+- Each action now has **two key slots** (Key + Alt key). Before, rebinding replaced *both* default keys (e.g. A and Left Arrow) with one.
+- A key can only do one thing: binding it to a new action removes it from the old one.
+- **Esc** cancels while waiting for a key, otherwise goes back. Added **Reset to Defaults**.
+- Old Week 5 keybind saves still load.
