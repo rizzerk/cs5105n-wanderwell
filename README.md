@@ -361,3 +361,18 @@ https://github.com/user-attachments/assets/d453ec78-c181-4d2f-976f-1d1bc7bdfc7e
 - A key can only do one thing: binding it to a new action removes it from the old one.
 - **Esc** cancels while waiting for a key, otherwise goes back. Added **Reset to Defaults**.
 - Old Week 5 keybind saves still load.
+
+### Team Git practice
+Each change was made on its own branch and merged into `main` through a pull request:
+
+| PR | Branch | Change |
+|---|---|---|
+| [#1](https://github.com/rizzerk/cs5105n-wanderwell/pull/1) | `chore/web-export` | Export presets, renderer switch, builds |
+| [#2](https://github.com/rizzerk/cs5105n-wanderwell/pull/2) | `feature/touch-controls` | Touch controls + stretch aspect |
+| [#3](https://github.com/rizzerk/cs5105n-wanderwell/pull/3) | `feature/controls-menu-redesign` | Controls menu redesign |
+
+**Merge conflict:** #2 and #3 both started from the same `main` and both edited the Controls table in this README (#2 added a Touch column, #3 changed the Rebindable column). After #2 was merged, #3 conflicted. I merged `origin/main` into the branch, kept both changes in one table, then pushed and merged #3.
+
+![Merge conflict in README.md](screenshots/mergeconflit.png)
+
+The builds in `builds/` were re-exported after both PRs so they include the touch controls and the new controls menu.
